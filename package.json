@@ -1,0 +1,92 @@
+{
+  "name": "testament",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start:server": "browser-sync start -s dist -w src/*.html src/css/*.css src/js/*.js",
+    "compile:pug": "pug src/pug/ --hierarchy -o dist/ -P",
+    "watch:pug": "pug src/pug/ --hierarchy -o dist/ -w -P",
+    "compile:css2cssprefix": "postcss dist/css/style.css -u autoprefixer -o dist/css/style.css",
+    "compile:scss2css": "sass src/scss/style.scss:dist/css/style.css --style=expanded --source-map-urls=relative",
+    "compile:scss2cssprefix": "run-s compile:scss2css compile:css2cssprefix",
+    "watch:scss2cssprefix": "chokidar \"src/scss/\" --command \"npm run compile:scss2cssprefix\" --initial",
+    "compile:ts": "tsc",
+    "watch:ts": "tsc -w",
+    "watch:img": "chokidar \"src/img/**/*\" --command \"node imagemin.js\" --initial",
+    "delete:dist": "rimraf dist",
+    "copy:sitemapxml": "cpx \"src/sitemap.xml\" dist/",
+    "copy:robotstxt": "cpx \"src/robots.txt\" dist/",
+    "copy:humanstxt": "cpx \"src/humans.txt\" dist/",
+    "copy:manifestjson": "cpx \"src/manifest.json\" dist/",
+    "copy:faviconico": "cpx \"src/favicon.ico\" dist/",
+    "copy:apple-touch-iconpng": "cpx \"src/apple-touch-icon.png\" dist/",
+    "prewatch:all": "run-s delete:dist copy:sitemapxml copy:robotstxt copy:humanstxt copy:manifestjson copy:faviconico copy:apple-touch-iconpng",
+    "watch:all": "run-p watch:pug watch:scss2cssprefix watch:ts watch:img start:server",
+    "lint:scss": "stylelint \"**/*.scss\"",
+    "format:scss": "stylelint --fix \"**/*.scss\"",
+    "lint:ts": "eslint src/ts/**/*.ts",
+    "format:ts": "eslint src/ts/**/*.ts --fix",
+    "format:all": "run-p format:scss format:ts",
+    "test": "jest",
+    "min:css": "cleancss -o dist/css/style.css dist/css/style.css",
+    "min:js": "uglifyjs dist/js/main.js -o dist/js/main.js",
+    "prepare:all": "run-p min:js min:css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.0.3",
+    "@typescript-eslint/parser": "^5.37.0",
+    "autoprefixer": "^10.4.11",
+    "browser-sync": "^2.27.10",
+    "chokidar-cli": "^3.0.0",
+    "clean-css-cli": "^5.6.1",
+    "cpx": "^1.5.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "imagemin-cli": "^7.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-keep-folder": "^5.3.2",
+    "imagemin-svgo": "^9.0.0",
+    "imagemin-webp": "^7.0.0",
+    "jest": "^29.0.3",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^10.0.0",
+    "prettier": "^2.7.1",
+    "pug-cli": "github:pugjs/pug-cli#master",
+    "rimraf": "^2.7.1",
+    "sass": "^1.54.9",
+    "simple-git-hooks": "^2.8.0",
+    "stylelint": "^14.11.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-scss": "^4.3.0",
+    "ts-jest": "^29.0.1",
+    "typescript": "^4.8.3",
+    "uglify-es": "^3.3.9"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "src/ts/*.ts": [
+      "prettier --write",
+      "eslint --fix --quiet"
+    ],
+    "src/scss/*.scss": [
+      "prettier --write",
+      "stylelint --fix --quiet"
+    ]
+  },
+  "_id": "testament@1.0.0"
+}
