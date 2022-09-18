@@ -1,0 +1,15 @@
+- var pagetitle="サブページ"
+- var pagedescription="サブページです。"
+
+doctype html
+html(lang='ja')
+  include ../_include/_head.pug
+
+  body
+    include ../_include/_header.pug
+    main.main
+      .content
+        h1.heading1 ページタイトル
+        p Pugから生成されたページです。
+        a(href="/index.html") トップページ
+    include ../_include/_footer.pug

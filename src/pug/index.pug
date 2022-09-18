@@ -1,1 +1,12 @@
-boby
+doctype html
+html(lang='ja')
+  include _include/_head.pug
+
+  body
+    include _include/_header.pug
+    main.main
+      .content
+        h1.heading1 ページタイトル
+        p Pugから生成されたページです。
+        a(href="/subpage/subpage.html") サブページへ
+    include _include/_footer.pug

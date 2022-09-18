@@ -52,4 +52,4 @@ dist 配下のファイルをそのままアップロード
 
 ## Qiita
 
-https://qiita.com/takeshisakuma/items/
+https://qiita.com/takeshisakuma/items/34db1aa11a4e25508f66
