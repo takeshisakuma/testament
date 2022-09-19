@@ -1,0 +1,7 @@
+@use "../foundation/base" as base;
+
+.footer {
+  background-color: base.$backgroundColor;
+  padding: 20px;
+  text-align: center;
+}

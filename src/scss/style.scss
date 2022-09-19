@@ -1,7 +1,33 @@
-.a {
-  color: red;
-  .b {
-    color: green;
-    width: 1000px;
-  }
-}
+/**
+* Foundation
+* ========================== */
+
+@use "foundation/_reset";
+@use "foundation/_base" as base;
+
+/**
+* Layout
+* ========================== */
+
+@use "layout/_header";
+@use "layout/_footer";
+@use "layout/_main";
+
+/* Object
+* ========================== */
+
+/* Component ------------ */
+
+@use "object/component/_heading";
+@use "object/component/_avatar";
+@use "object/component/_button";
+
+/* Project ------------ */
+
+@use "object/project/_articles";
+@use "object/project/_comments";
+
+/* Utility ------------ */
+
+@use "object/utility/_align";
+@use "object/utility/_margin";
